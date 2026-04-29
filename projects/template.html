@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Richard Wang 的项目详情。">
+  <title>项目详情 | Richard Wang</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="sub-page">
+  <header class="site-header inline-header">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">RW</span>
+      <span>Richard Wang</span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="../index.html">主页</a>
+      <a href="index.html">项目</a>
+      <a href="../about/index.html">关于</a>
+    </nav>
+  </header>
+
+  <main id="project-detail" class="detail-layout">
+    <section class="detail-copy">
+      <p id="project-category" class="eyebrow">Project</p>
+      <h1 id="project-title">项目详情</h1>
+      <p id="project-summary" class="lead">正在加载项目内容。</p>
+      <p id="project-description"></p>
+      <div id="project-tags" class="tag-row"></div>
+      <a id="project-link" class="button primary" href="index.html">返回项目列表</a>
+    </section>
+
+    <section class="detail-media" aria-label="项目媒体预览">
+      <div id="project-visual" class="project-visual large theme-teal" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <dl class="meta-list detail-meta">
+        <div>
+          <dt>当前状态</dt>
+          <dd id="project-status">Prototype</dd>
+        </div>
+        <div>
+          <dt>数据来源</dt>
+          <dd>js/projects.json</dd>
+        </div>
+      </dl>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('id');
+    const title = document.getElementById('project-title');
+    const category = document.getElementById('project-category');
+    const summary = document.getElementById('project-summary');
+    const description = document.getElementById('project-description');
+    const tags = document.getElementById('project-tags');
+    const status = document.getElementById('project-status');
+    const visual = document.getElementById('project-visual');
+    const link = document.getElementById('project-link');
+
+    fetch('../js/projects.json')
+      .then((response) => response.json())
+      .then((projects) => {
+        const project = projects.find((item) => item.id === projectId) || projects[0];
+        document.title = `${project.name} | Richard Wang`;
+        title.textContent = project.name;
+        category.textContent = project.category;
+        summary.textContent = project.summary;
+        description.textContent = project.description;
+        status.textContent = project.status;
+        visual.className = `project-visual large theme-${project.imageTheme || 'teal'}`;
+        link.href = 'index.html';
+        link.textContent = '返回项目列表';
+
+        tags.innerHTML = '';
+        project.tech.forEach((item) => {
+          const tag = document.createElement('span');
+          tag.textContent = item;
+          tags.appendChild(tag);
+        });
+      })
+      .catch(() => {
+        title.textContent = '项目数据暂时无法加载';
+        summary.textContent = '请返回项目列表稍后再试。';
+      });
+  </script>
+</body>
+</html>

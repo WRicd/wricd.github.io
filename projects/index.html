@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Richard Wang 的项目列表。">
+  <title>项目 | Richard Wang</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="sub-page">
+  <header class="site-header inline-header">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">RW</span>
+      <span>Richard Wang</span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="../index.html">主页</a>
+      <a href="../about/index.html">关于</a>
+      <a href="../resume/index.html">简历</a>
+    </nav>
+  </header>
+
+  <main class="page-wrap">
+    <section class="page-heading">
+      <p class="eyebrow">Projects</p>
+      <h1>项目星图</h1>
+      <p>这里集中展示主页星点对应的项目。先用示例内容打通结构，后续可直接替换 JSON 数据和媒体资源。</p>
+    </section>
+
+    <section id="project-grid" class="project-grid" aria-label="项目列表"></section>
+  </main>
+
+  <script>
+    const themeClass = (theme) => `project-visual ${theme ? `theme-${theme}` : 'theme-teal'}`;
+    const grid = document.getElementById('project-grid');
+
+    fetch('../js/projects.json')
+      .then((response) => response.json())
+      .then((projects) => {
+        projects.forEach((project) => {
+          const card = document.createElement('article');
+          card.className = 'project-card';
+
+          const visual = document.createElement('div');
+          visual.className = themeClass(project.imageTheme);
+          visual.setAttribute('aria-hidden', 'true');
+          visual.innerHTML = '<span></span><span></span><span></span>';
+
+          const category = document.createElement('p');
+          category.className = 'eyebrow';
+          category.textContent = project.category;
+
+          const title = document.createElement('h2');
+          title.textContent = project.name;
+
+          const summary = document.createElement('p');
+          summary.textContent = project.summary;
+
+          const tags = document.createElement('div');
+          tags.className = 'tag-row';
+          project.tech.forEach((item) => {
+            const tag = document.createElement('span');
+            tag.textContent = item;
+            tags.appendChild(tag);
+          });
+
+          const link = document.createElement('a');
+          link.className = 'button ghost compact';
+          link.href = `template.html?id=${project.id}`;
+          link.textContent = '查看详情';
+
+          card.append(visual, category, title, summary, tags, link);
+          grid.appendChild(card);
+        });
+      })
+      .catch(() => {
+        grid.innerHTML = '<p class="empty-state">项目数据暂时无法加载。</p>';
+      });
+  </script>
+</body>
+</html>

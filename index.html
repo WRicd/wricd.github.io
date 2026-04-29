@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Richard Wang 的个人作品集主页，使用星群交互展示项目入口。">
+  <title>Richard Wang | 星群作品集</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="home-page">
+  <main id="home" class="star-shell" aria-label="个人主页星群入口">
+    <div id="starfield" class="starfield" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="返回主页">
+        <span class="brand-mark">RW</span>
+        <span>Richard Wang</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="projects/index.html">项目</a>
+        <a href="about/index.html">关于</a>
+        <a href="resume/index.html">简历</a>
+      </nav>
+    </header>
+
+    <section class="hero-panel" aria-labelledby="hero-title">
+      <p class="eyebrow">Interactive Portfolio</p>
+      <h1 id="hero-title">把工程、仿真与可视化连成一片星图</h1>
+      <p class="hero-copy">
+        这里是 Richard Wang 的个人主页雏形。每颗亮星代表一个项目，点击即可查看摘要并进入详情页。
+      </p>
+      <div class="hero-actions" aria-label="主页操作">
+        <a class="button primary" href="projects/index.html">查看全部项目</a>
+        <a class="button ghost" href="about/index.html">了解我</a>
+      </div>
+    </section>
+
+    <aside id="project-sidebar" class="project-sidebar" aria-live="polite" aria-label="项目预览">
+      <button id="sidebar-close" class="icon-button close-button" type="button" aria-label="关闭项目预览">×</button>
+      <p id="sidebar-category" class="eyebrow">Project</p>
+      <h2 id="sidebar-title">选择一颗星</h2>
+      <p id="sidebar-desc">点击星群中的项目星点，在这里预览项目摘要。</p>
+      <dl class="meta-list">
+        <div>
+          <dt>技术方向</dt>
+          <dd id="sidebar-tech">Three.js / Web / Simulation</dd>
+        </div>
+        <div>
+          <dt>状态</dt>
+          <dd id="sidebar-status">Prototype</dd>
+        </div>
+      </dl>
+      <a id="sidebar-link" class="button primary full" href="projects/index.html">查看详情</a>
+    </aside>
+
+    <div id="hover-card" class="hover-card" hidden></div>
+    <div id="fallback-projects" class="fallback-projects" aria-label="项目入口"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# Local verification output
+edge-*.png
+
+# Dependencies and logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Unity / C# generated folders for future embedded projects
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+bin/
+obj/
+
